@@ -6,37 +6,69 @@
 	font-family: Arial;
 }
 
-fieldset {
-	position: absolute;
-	top: 40%;
-	left: 4%;
-	display: inline-block;
-	padding: 3%;
-	width: 30%;
+#modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.8);
 }
 
-fieldset h2 {
+#register {
+	position:relative;
+	left: 15%;
+	top: 10%;
+	background-color: grey;
+	padding: 30px;
+	border-radius: 20px;
+    border: 1px solid #888;
+    width: 60%;
+    transition: opacity 400ms ease-in;
+}
+
+#close {
+	float:right;
+	font-size: 2em;
+	margin-right: 1.5em;
+	cursor:pointer;
+}
+
+#login {
+	display: inline-block;
+	position: absolute;
+	top: 30%;
+	left: 4%;
+	padding: 3%;
+	width: 30%;
+	background-color: transparent;
+}
+
+.form h2 {
 	font-size: 2em;
 	font-style: bold;
 	color:white;
 }
 
-fieldset input[type="text"], fieldset input[type="password"] {
-	font-size: 1.3em;
+input[type="email"], input[type="text"], input[type="password"] {
+	font-size: 1.2em;
 	border: none;
 	border-bottom: 1px solid black;
 	background-color: transparent;
 	color: blanchedalmond;
 	margin: 20px;
-	width: 100%;
+	width: 90%;
 }
 
-fieldset input:focus {
+ input:focus {
 	outline-width: 0;
 }
 
-fieldset input[type="submit"] {
-	width: 100%;
+.form input[type="submit"], button {
+	width: 90%;
 	font-size: 1.3em;
 	background-color: lightgrey;
 	border: none;
@@ -46,7 +78,7 @@ fieldset input[type="submit"] {
 	margin: 20px;
 }
 
-fieldset input[type="submit"]:hover {
+.form input[type="submit"]:hover, button:hover {
 	cursor: pointer;
 	background-color: beige;
 }

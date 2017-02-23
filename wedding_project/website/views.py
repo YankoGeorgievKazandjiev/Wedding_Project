@@ -3,6 +3,7 @@ from django.views import View
 from wedding_project.forms import RegisterForm, LoginForm
 from django.views.generic import ListView, CreateView
 from django.contrib.auth.models import User
+# from User.models import User
 from django.contrib.auth import authenticate, login
 from django.shortcuts import redirect, HttpResponse, reverse
 from django.views.generic.edit import FormView
@@ -36,12 +37,15 @@ class indexView(View):
 
 
     def post(self, request):
-        username = self.request.POST.get('username')
+        username = self.request.POST.get('email')
         password = self.request.POST.get('password')
         user = authenticate(username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect(reverse('website:registerView'))
+            if user.is_superuser:
+                return HttpResponse("Superuser page")
+            else:
+                return HttpResponse('Regular user page')
         else:
             return render(self.request, 'help.html', locals())
         form = self.form_class(self.request.POST)
@@ -63,14 +67,23 @@ class RegisterView(CreateView):
     def post(self, request):
         form = self.form_class(self.request.POST)
         if form.is_valid():
+            user = User.objects.create_user(first_name=form.cleaned_data['first_name'],
+            last_name=form.cleaned_data['last_name'],
+            password=form.cleaned_data['password'],
+            email=form.cleaned_data['email'],
+            username=form.cleaned_data['email'],
+            is_superuser=0)
 
-            user = form.save(commit=False)
-            first_name = form.cleaned_data['firts_name']
-            last_name = form.cleaned_data['last_name']
-            email = form.cleaned_data['email']
-            password = form.cleaned_data['password']
+            # user = form.save(commit=False)
+            # first_name = form.cleaned_data['first_name']
+            # last_name = form.cleaned_data['last_name']
+            # email = form.cleaned_data['email']
+            # password = form.cleaned_data['password']
+            # is_superuser = 1
 
             user.save()
+            return redirect(reverse('website:index'))
+        return HttpResponse("form's not valid")
 
 
 
