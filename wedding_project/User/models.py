@@ -5,14 +5,14 @@ from django.db import models
 
 class User(models.Model):
     email = models.EmailField(unique=True)
-    password = models.CharField('password', max_length=128)
+    password = models.CharField(default='password', max_length=128)
     first_name = models.CharField(max_length=20)
     last_name = models.CharField(max_length=20)
 
 
 class Wedding(models.Model):
-    groom = models.ForeignKey('User', related_name='groom')
-    bride = models.ForeignKey('User', related_name='bride')
+    groom = models.ForeignKey(User, related_name='groom')
+    bride = models.ForeignKey(User, related_name='bride')
 
 
 class Present(models.Model):
