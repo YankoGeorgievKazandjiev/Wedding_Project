@@ -11,10 +11,10 @@
 </head>
 <body>
 	<div id="wrapper">
-      <fieldset id="register" class="form">
+      <div id="register" class="form">
         <a href="/"><span id="close">&times;</span></a>
         <h2>Register</h2>
-        <form method="POST">
+        <form method="POST" action="">
           {% csrf_token %}
           {{ form.first_name }}
           {{ form.last_name }}
@@ -22,7 +22,7 @@
           {{ form.password }}
           <input type="submit" value="Register">
         </form>
-      </fieldset>
+      </div>
   </div>
 </body>
 </html>

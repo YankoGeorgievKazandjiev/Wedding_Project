@@ -16,22 +16,38 @@
 	<div id="wrapper">
 		<div class="presentReservation col-sm-4 col-sm-offset-1">
 			<h2 class="title">Choose presents</h2>
-			{% for present in present_list %}
+					{% for present in present_list %}
+						{% if present.approved %}
+							<div class="row">
+								<form method="POST" action="{% url 'website:update-present' present.id %}">
+									{% csrf_token %}
+								<p>{{present.present_name}}</p>
+								<input type="hidden" name="approved" value="False">
+								<span style="float:right; margin-right:20%;"><input class="btn btn-success" type="submit" value="+"/></span>
+							</form>
+							</div>
+						{% endif %}
+					{% endfor %}
+			<div class="row">
+			</div>
+			<div class="row">
+				<div >
+					<form method="POST" action="{% url 'website:create-present' %}">
+						{% csrf_token %}
+						<input id="suggestion1" type="text" name="text" placeholder="Add here..." />
+						<input id="saveButton" class="btn btn-warning" type="submit" value="+ Add Suggestion"/>
+					</form>
+				</div>
+			</div>
+		</div>
+		<div class="presentReservation col-sm-4" style="margin-left:2%;">
+			<h2 class="title">My gifts</h2>
+			{% for present in gifts %}
 				<div class="row">
-					<input type="checkBox"><p>{{present.present_name}}</p></input>
+						<p>{{ present.present_name }}</p>
+						<span style="float:right; margin-right:20%;"><input class="btn btn-danger" type="submit" value="-"/></span>
 				</div>
 			{% endfor %}
-			<div class="row">
-				<input id="suggestion1" type="text" placeholder="Add here..." />
-			</div>
-			<div class="row">
-				<div class="col-sm-3 col-sm-offset-2">
-					<input id="addNewSuggestions" class="btn btn-success" type="button" onclick="addNewSuggestions()" value="+ Add new suggestion"/>
-				</div>
-				<div class="col-sm-2 col-sm-offset-2">
-					<input id="saveButton" class="btn btn-warning" type="button" onclick="saveList()" value="Save list"/>
-				</div>
-			</div>
 		</div>
 	</div>
 </body>

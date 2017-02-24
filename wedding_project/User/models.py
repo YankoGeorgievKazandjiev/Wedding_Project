@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 class Present(models.Model):
     present_name = models.CharField(max_length=128, blank=True, null=True)
     reserved_by = models.ForeignKey(User)
-    approved = models.BooleanField()
+    approved = models.BooleanField(default=True)
 
 
 class Comment(models.Model):

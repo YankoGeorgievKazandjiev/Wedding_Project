@@ -1,5 +1,5 @@
 from django import forms
-from User.models import User
+from User.models import User, Present
 
 
 class RegisterForm(forms.ModelForm):
