@@ -1,0 +1,38 @@
+ <!DOCTYPE html>
+<html>
+<head>
+<style>
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+    text-align: center;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+</style>
+</head>
+<body>
+
+ <table style="width:100%">
+ {% for user in user_list %}
+  <tr>
+    <th>Email</th>
+    <th>First name</th>
+    <th>Last name</th>
+  </tr>
+  <tr>
+    <td>{{user.email}}</td>
+    <td>{{user.first_name}}</td>
+    <td>{{user.last_name}}</td>
+  </tr>
+{% endfor %}
+</table> 

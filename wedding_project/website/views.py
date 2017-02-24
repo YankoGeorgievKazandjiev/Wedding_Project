@@ -6,8 +6,10 @@ from django.contrib.auth.models import User
 # from User.models import User
 from django.contrib.auth import authenticate, login
 from django.shortcuts import redirect, HttpResponse, reverse
-from django.views.generic.edit import FormView
+# from django.views.generic.edit import FormView
 from .forms import LoginForm
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 
 # Create your views here.
 
@@ -86,9 +88,6 @@ class RegisterView(CreateView):
         return HttpResponse("form's not valid")
 
 
-
-
-
 class LoginView(View):
     form_class = LoginForm
     template_name = 'login.html'
@@ -100,5 +99,16 @@ class LoginView(View):
         pass
 
 
-class GuestListView(ListView):
-    pass
+class GuestListView(LoginRequiredMixin, ListView):
+
+    login_url = '/'
+    redirect_field_name = 'redirect_to'
+
+    def get_queryset(self):
+        return User.objects.all()
+
+
+class PresentListView(ListView):
+
+    def get_queryset(self):
+        return Present.objects.all()
