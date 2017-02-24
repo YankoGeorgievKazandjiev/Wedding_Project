@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views import View
 from wedding_project.forms import RegisterForm, LoginForm
-from django.views.generic import ListView, CreateView
+from django.views.generic import ListView, CreateView, TemplateView
 from django.contrib.auth.models import User
 # from User.models import User
 from django.contrib.auth import authenticate, login
@@ -9,6 +9,7 @@ from django.shortcuts import redirect, HttpResponse, reverse
 # from django.views.generic.edit import FormView
 from .forms import LoginForm
 from django.contrib.auth.mixins import LoginRequiredMixin
+from User.models import Present
 
 
 # Create your views here.
@@ -45,9 +46,9 @@ class indexView(View):
         if user is not None:
             login(request, user)
             if user.is_superuser:
-                return HttpResponse("Superuser page")
+                return redirect(reverse('website:AdminView'))
             else:
-                return HttpResponse('Regular user page')
+                return redirect(reverse('website:present'))
         else:
             return render(self.request, 'help.html', locals())
         form = self.form_class(self.request.POST)
@@ -88,27 +89,36 @@ class RegisterView(CreateView):
         return HttpResponse("form's not valid")
 
 
-class LoginView(View):
-    form_class = LoginForm
-    template_name = 'login.html'
+class AdminView(TemplateView):
+    # login_url = '/'
+    # redirect_field_name = 'admin_page.html'
+    template_name = "admin_page.html"
+    def get_queryset(self):
+        return redirect(redirect_field_name)
 
-    def get(self, request):
-        pass
-
-    def post(self, request):
-        pass
+    # def get_queryset(self):
+    #     return User.objects.all()
+    # form_class = LoginForm
+    # template_name = 'login.html'
+    #
+    def get(self, request,*args, **kwargs):
+        return super().get(self, *args, **kwargs)
+    #
+    # def post(self, request):
+    #     pass
 
 
 class GuestListView(LoginRequiredMixin, ListView):
 
     login_url = '/'
-    redirect_field_name = 'redirect_to'
+    redirect_field_name = 'present_list.html'
 
     def get_queryset(self):
         return User.objects.all()
+        # return redirect(reverse('website:guests'))
 
 
 class PresentListView(ListView):
-
+    
     def get_queryset(self):
         return Present.objects.all()

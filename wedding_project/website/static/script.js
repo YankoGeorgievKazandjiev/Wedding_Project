@@ -9,9 +9,21 @@ function closeRegistrationForm() {
 }
 
 function appendNewPresent() {
-	var newId = parseInt($('#addButton').parent().parent().prev().children().attr('id').replace('present', '')) + 1;
+	var newId = parseInt($('#addButtonPresent').parent().parent().prev().children().attr('id').replace('present', '')) + 1;
 	var newPresentInput = '<div class="row"><input id="present' + newId + '" type="text"/></div>';
-	$('#addButton').parent().parent().before(newPresentInput);
+	$('#addButtonPresent').parent().parent().before(newPresentInput);
+}
+
+function appendNewGuest() {
+	var newId = parseInt($('#addButtonGuest').parent().parent().prev().children().attr('id').replace('guest', '')) + 1;
+	var newGuestInput = '<div class="row"><input id="guest' + newId + '" type="text"/></div>';
+	$('#addButtonGuest').parent().parent().before(newGuestInput);
+}
+
+function addNewSuggestions() {
+	var newId = parseInt($('#addNewSuggestions').parent().parent().prev().children().attr('id').replace('guest', '')) + 1;
+	var addNewSuggestionInput = '<div class="row"><input id="suggestion' + newId + '" type="text" placeholder="Add here..."/></div>';
+	$('#addNewSuggestions').parent().parent().before(addNewSuggestionInput);
 }
 
 function saveList() {
@@ -21,5 +33,8 @@ function saveList() {
 		presents.push($(this).val());
 	});
 
-	$.post("./test.py", presents);
+	var postData = {
+		presents: presents
+	};
+	$.post("./test.py", postData);
 }
