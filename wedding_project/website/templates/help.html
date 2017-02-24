@@ -1,11 +1,27 @@
 {% csrf_token %}
+{% load static %}
 <html>
-<h1>If you are a guest then your username and password are your e-mail and your....</h1>
+<head>
+	<meta charset="utf-8">
+	<title>Help</title>
+	<script src="./scripts/script.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="{% static 'styles/reset.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'styles/style.css' %}">
+</head>
+<body>
+	<div id="wrapper">
+		<div id="error">
+			<div id="errorMessage">
+				<h1>If you are a guest then your username and password are your e-mail and your...If you're not invited then... There's nothing for you to see here :) Sorry!</h2>
+			</div>
 
-<h2>If you're not invited then... There's nothing for you to see here :) Sorry!</h2>
-
-<div class="container" style="background-color:#f1f1f1">
-    <span class="psw"><a href="/">Go back to log in!</a></span>
-  </div>
-
+			<div class="container">
+				<a href="/"><button>Go back to log in!</button></a>
+			</div>
+		</div>
+	</div>
+</body>
 </html>

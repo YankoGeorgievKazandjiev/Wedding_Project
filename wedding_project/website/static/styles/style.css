@@ -1,9 +1,14 @@
 #wrapper {
 	background-image: url("../images/Wedding2.jpg");
+	position: fixed;
+    left: 0;
+    top: 0;
 	text-align: center;
 	width: 100%;
 	height: 654px;
+    overflow: auto;
 	font-family: Arial;
+	padding: 5%;
 }
 
 #modal {
@@ -12,8 +17,8 @@
     z-index: 1;
     left: 0;
     top: 0;
-    width: 100%;
-    height: 100%;
+    width: 100%; 
+    height: 100%; 
     overflow: auto;
     background-color: rgba(0,0,0,0.8);
 }
@@ -50,11 +55,11 @@
 .form h2 {
 	font-size: 2em;
 	font-style: bold;
-	color:white;
+	color: white;
 }
 
 input[type="email"], input[type="text"], input[type="password"] {
-	font-size: 1.2em;
+	font-size: 1.3em;
 	border: none;
 	border-bottom: 1px solid black;
 	background-color: transparent;
@@ -63,7 +68,7 @@ input[type="email"], input[type="text"], input[type="password"] {
 	width: 90%;
 }
 
- input:focus {
+input:focus {
 	outline-width: 0;
 }
 
@@ -81,4 +86,37 @@ input[type="email"], input[type="text"], input[type="password"] {
 .form input[type="submit"]:hover, button:hover {
 	cursor: pointer;
 	background-color: beige;
+}
+
+#error {
+	padding-top:15%;
+	width: 50%;
+}
+
+#errorMessage h1, .title {
+	color: white;
+	font-size: 2em;
+}
+
+.container {
+	margin-top: 5%;
+	width: 100%;
+}
+
+.presents, .guests, .presentReservation {
+	padding-top: 3%;
+	padding-bottom: 3%;
+	background-color: grey;
+	border-radius: 10px;
+}
+
+.presentReservation div {
+	margin-top: 2%;
+	margin-bottom: 2%;
+}
+
+.presentReservation p {
+	margin-left:2%;
+	display: inline;
+	font-size: 1.5em;
 }
